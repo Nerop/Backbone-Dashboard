@@ -1,0 +1,6 @@
+{
+  "require": {
+    "php": ">=5.4",
+    "zendframework/zend-diactoros": "^1.3"
+  }
+}
