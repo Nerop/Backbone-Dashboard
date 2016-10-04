@@ -11,6 +11,7 @@ App.Views.Add_EditView = Backbone.View.extend({
         //let collectionName = $('#collection').text();
         let number = $('#number').text();
         let name = $('#name').text();
+        console.log('saved');
 
         if ($("#change_model option:selected").text() === "Редактирование") {
             if ($("#change_collection option:selected").text() === "Автомобили") {
@@ -75,6 +76,7 @@ App.Views.Add_EditView = Backbone.View.extend({
 
     render: function () {
         this.delegateEvents();
+        // $('.add_edit_container').html(this.template(this.model.toJSON()));
         return this.$el.html(this.template(this.model.toJSON()));
     }
 });
