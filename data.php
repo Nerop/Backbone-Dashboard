@@ -9,6 +9,7 @@ use Zend\Diactoros\Server;
 use Zend\Diactoros\ServerRequestFactory;
 
 require_once __DIR__ . '/vendor/autoload.php';
+echo '<p>Some text.</p>';
 
 $handler = function(ServerRequestInterface $request, ResponseInterface $response){
     $query = $request->getQueryParams();
