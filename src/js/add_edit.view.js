@@ -8,60 +8,39 @@ App.Views.Add_EditView = Backbone.View.extend({
     },
 
     saveModel: function () {
-        //let collectionName = $('#collection').text();
-        let number = $('#number').text();
-        let name = $('#name').text();
+
+        let number = $('#number').val();
+        let name = $('#name').val();
         console.log('saved');
 
         if ($("#change_model option:selected").text() === "Редактирование") {
             if ($("#change_collection option:selected").text() === "Автомобили") {
-                // let editModel = App.Global.get('autosCollection').where({number: $('#number').text()});
-                // editModel.set({name: $('#name').text()});
-                console.log('click');
+
+                var editModel = App.Global.get('autosCollection').where({number: number});
+                editModel[0].attributes.name = name;
             } else if ($("#change_collection option:selected").text() === "Города") {
-                let editModel = App.Global.get('citiesCollection').where({
-                    number: $('#number').text()
-                });
-                editModel.set({
-                    name: $('#name').text()
-                });
+                let editModel = App.Global.get('citiesCollection').where({number: number});
+                editModel[0].attributes.name = name;
             } else {
-                let editModel = App.Global.get('smartphonesCollection').where({
-                    number: $('#number').text()
-                });
-                editModel.set({
-                    name: $('#name').text()
-                });
+                let editModel = App.Global.get('smartphonesCollection').where({number: number});
+                editModel[0].attributes.name = name;
             }
         } else if ($("#change_model option:selected").text() === "Добавление") {
             if ($("#change_collection option:selected").text() === "Автомобили") {
-                // App.Global.set("'" + name + number + "'", new App.Models.AutoModel({
-                //     name: "'" + name + "'",
-                //     number: "'" + number + "'"
-                // }));
-                //App.Global.set("autosCollection", App.Global.get("'" + name + number + "'"));
-                // console.log('added new auto');
 
                 let collection = App.Global.get('autosCollection');
                 collection.add({name: $('#name').val(), number: $('#number').val()});
-
-                //console.log(collection.toJSON());
-                //App.Global.set("autosCollection", collection);
-                console.log(App.Global.get('autosCollection').toJSON());
+                // console.log(App.Global.get('autosCollection').toJSON());
             } else if ($("#change_collection option:selected").text() === "Города") {
+
                 let collection = App.Global.get('citiesCollection');
                 collection.add({name: $('#name').val(), number: $('#number').val()});
-
-                //console.log(collection.toJSON());
-                //App.Global.set("autosCollection", collection);
-                console.log(App.Global.get('citiesCollection').toJSON());
+                // console.log(App.Global.get('citiesCollection').toJSON());
             } else {
+
                 let collection = App.Global.get('smartphonesCollection');
                 collection.add({name: $('#name').val(), number: $('#number').val()});
-
-                //console.log(collection.toJSON());
-                //App.Global.set("autosCollection", collection);
-                console.log(App.Global.get('smartphonesCollection').toJSON());
+                // console.log(App.Global.get('smartphonesCollection').toJSON());
             }
 
         }
@@ -76,12 +55,10 @@ App.Views.Add_EditView = Backbone.View.extend({
 
     render: function () {
         this.delegateEvents();
-        // $('.add_edit_container').html(this.template(this.model.toJSON()));
         return this.$el.html(this.template(this.model.toJSON()));
     }
 });
 
-// var autoView = new App.Views.AutoView({model: autoModel});
 App.Global.set("add_editView", new App.Views.Add_EditView({
     model: App.Global.get("add_editModel")
 }));

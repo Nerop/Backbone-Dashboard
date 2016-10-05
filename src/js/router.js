@@ -44,6 +44,7 @@ App.Router = Backbone.Router.extend({
         console.log('add_edit');
         // $('.add_edit_container').html('');
          $('.add_edit_container').append(App.Global.get('add_editView').el);
+         $('.add_edit').show();
     }
 });
 

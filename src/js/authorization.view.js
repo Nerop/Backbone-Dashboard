@@ -6,6 +6,8 @@ $(function () {
         initialize: function () {
             //vent.on('Authorize:show', this.Authorize, this);
             this.Authorize();
+            console.log('el' + this.el);
+            this.addEvent();
             //this.render();
         },
 
@@ -15,16 +17,21 @@ $(function () {
             'click #btn-login': 'log'
         },
 
-        log: function () {
-            // localStorage.setItem('Username',$('#userName').html());
-            // localStorage.setItem('Password',$('#userPassword').html());
-            // this.Authorize();
-            console.log('clicked');
+        addEvent: function () {
+            var loginButton = document.getElementById('btn-login');
+            function log() {
+                localStorage.setItem('Username', $('#userName').val());
+                localStorage.setItem('Password', $('#userPassword').val());
+                location.reload();
+                // Authorize();
+            }
+            loginButton.addEventListener('click', log, false);
         },
 
         logOff: function () {
             localStorage.setItem('Username', '');
             localStorage.setItem('Password', '');
+            $('.add_edit').hide();
             location.reload();
         },
 
@@ -36,7 +43,7 @@ $(function () {
                 $('.authorization-container').html('<div class="container main-container admin-page"><div class="row"><div class="col-md-2 sidebar"><ul class="nav nav-pills nav-stacked"><li><a href="#autos">Автомобили</a></li><li><a href="#cities">Города</a></li><li><a href="#smartphones">Смартфоны</a></li><li><a href="#add_edit">Добавление/Редактирование</a></li></ul></div><div class="col-md-10 content"><div class="panel panel-default"><div class="panel-heading">Рабочая область</div><table class="table table-striped custab object-holder"><thead><tr><th>ID</th><th class="text-center">Название</th></tr></thead></table></div></div></div></div>');
 
                 //location.href += '#authorize';
-                //setTimeout(this.logOff, 300000);
+                setTimeout(this.logOff, 300000);
                 console.log(this.model.get('authorized'));
             } else {
                 this.model.set('authorized', false);
